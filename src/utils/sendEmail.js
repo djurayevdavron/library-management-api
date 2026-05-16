@@ -5,6 +5,7 @@ export const sendEmail = async (
   subject,
   text
 ) => {
+
   try {
 
     const transporter =
@@ -19,6 +20,7 @@ export const sendEmail = async (
         requireTLS: true,
 
         auth: {
+
           user: process.env.BREVO_EMAIL,
 
           pass: process.env.BREVO_PASS,
@@ -34,7 +36,7 @@ export const sendEmail = async (
     const info =
       await transporter.sendMail({
 
-        from: "davrondjurayev7@gmail.com",
+        from: "djurayevdavron7@gmail.com",
 
         to,
 
