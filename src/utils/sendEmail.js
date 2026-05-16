@@ -1,33 +1,40 @@
 import nodemailer from "nodemailer";
 
-export const sendEmail = async (to, subject, text) => {
+export const sendEmail = async (
+  to,
+  subject,
+  text
+) => {
   try {
+    const transporter =
+      nodemailer.createTransport({
+        service: "gmail",
 
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false,
+        secure: true,
 
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      },
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
 
-      tls: {
-        rejectUnauthorized: false
-      }
-    });
+    const info =
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to,
+        subject,
+        text,
+      });
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to,
-      subject,
-      text
-    });
-
-    console.log("Email yuborildi");
+    console.log(
+      "EMAIL YUBORILDI:",
+      info.response
+    );
 
   } catch (error) {
-    console.error("Email xatosi:", error);
+    console.log(
+      "EMAIL ERROR:",
+      error
+    );
   }
 };
