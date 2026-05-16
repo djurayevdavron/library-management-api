@@ -34,7 +34,7 @@ export const sendEmail = async (
     const info =
       await transporter.sendMail({
 
-        from: process.env.BREVO_EMAIL,
+        from: "davrondjurayev7@gmail.com",
 
         to,
 
