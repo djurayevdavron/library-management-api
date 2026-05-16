@@ -12,9 +12,11 @@ export const sendEmail = async (
 
         host: "smtp-relay.brevo.com",
 
-        port: 587,
+        port: 2525,
 
         secure: false,
+
+        requireTLS: true,
 
         auth: {
           user: process.env.BREVO_EMAIL,
@@ -22,7 +24,11 @@ export const sendEmail = async (
           pass: process.env.BREVO_PASS,
         },
 
-        connectionTimeout: 10000,
+        tls: {
+          rejectUnauthorized: false,
+        },
+
+        connectionTimeout: 20000,
       });
 
     const info =
