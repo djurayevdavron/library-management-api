@@ -6,16 +6,21 @@ export const sendEmail = async (
   text
 ) => {
   try {
+
     const transporter =
       nodemailer.createTransport({
         host: "smtp-relay.brevo.com",
-        port: 587,
+
+        port: 2525,
+
         secure: false,
 
         auth: {
           user: process.env.BREVO_EMAIL,
           pass: process.env.BREVO_PASS,
         },
+
+        connectionTimeout: 10000,
       });
 
     const info =
@@ -27,11 +32,12 @@ export const sendEmail = async (
       });
 
     console.log(
-        "EMAIL YUBORILDI:",
-        info.response
-      );
+      "EMAIL YUBORILDI:",
+      info.response
+    );
 
   } catch (error) {
+
     console.log(
       "EMAIL ERROR:",
       error
