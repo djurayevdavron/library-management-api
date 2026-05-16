@@ -8,14 +8,20 @@ export const sendEmail = async (
   try {
     const transporter =
       nodemailer.createTransport({
-        service: "gmail",
-
-        secure: true,
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
 
         auth: {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASS,
         },
+
+        tls: {
+          rejectUnauthorized: false,
+        },
+
+        connectionTimeout: 10000,
       });
 
     const info =
@@ -30,7 +36,6 @@ export const sendEmail = async (
       "EMAIL YUBORILDI:",
       info.response
     );
-
   } catch (error) {
     console.log(
       "EMAIL ERROR:",
