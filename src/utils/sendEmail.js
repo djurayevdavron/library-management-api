@@ -9,14 +9,16 @@ export const sendEmail = async (
 
     const transporter =
       nodemailer.createTransport({
+
         host: "smtp-relay.brevo.com",
 
-        port: 2525,
+        port: 587,
 
         secure: false,
 
         auth: {
           user: process.env.BREVO_EMAIL,
+
           pass: process.env.BREVO_PASS,
         },
 
@@ -25,9 +27,13 @@ export const sendEmail = async (
 
     const info =
       await transporter.sendMail({
+
         from: process.env.BREVO_EMAIL,
+
         to,
+
         subject,
+
         text,
       });
 
